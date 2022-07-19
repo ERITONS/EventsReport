@@ -42,8 +42,7 @@ namespace ConsoleApp2
             {
 
                 var eventos = ConectorSql();
-
-                Console.WriteLine("Teste conexão com o banco");
+                GeradorDeArquivo(eventos);
             }
 
             public List<string> ConectorSql()
