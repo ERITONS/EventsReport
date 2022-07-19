@@ -40,32 +40,48 @@ namespace ConsoleApp2
         {
             public void Execute()
             {
+
+                var eventos = ConectorSql();
+                GeradorDeArquivo(eventos);
+            }
+
+            public List<string> ConectorSql()
+            {
                 var connString = "";
                 var query = "";
-            
-                using (SqlConnection conn = new SqlConnection(connString)) {
-                    
-                    var cmd = new SqlCommand(query, conn);
-                    var reader = cmd.ExecuteReader();
-                    var eventos = new List<string>();
+                var eventos = new List<string>();
 
-                    while (reader.Read())
-                    {
-                        eventos.Add(reader[0].ToString());
-                    }
+                //using (SqlConnection conn = new SqlConnection(connString))
+                //{
 
-                    File.WriteAllLines($@"", eventos.ToArray());
-                }
+                //    var cmd = new SqlCommand(query, conn);
+                //    var reader = cmd.ExecuteReader();
 
-                Console.WriteLine("Teste conexão com o banco");
+
+                //    while (reader.Read())
+                //    {
+                //        eventos.Add(reader[0].ToString());
+                //    }
+
+                //}
+
+                return eventos;
+
+            }
+
+            public void GeradorDeArquivo(List<string> eventos)
+            {
+                File.WriteAllLines($@"", eventos.ToArray());
             }
         }
 
         public interface IRuleEnginer
         {
             void Execute();
+            void GeradorDeArquivo(List<string> eventos);
+            List<string> ConectorSql();
         }
-    }
 
+    }
 
 }
